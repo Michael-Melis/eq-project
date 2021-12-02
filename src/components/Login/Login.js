@@ -1,15 +1,33 @@
 import { StyledLoginButton } from "../../muiStyles/LoginStyles/StyledLoginButton";
 import { StyledLoginBox } from "../../muiStyles/LoginStyles/StyledLoginBox";
 import { StyledTextField } from "../../muiStyles/LoginStyles/StyledTextField";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import ModalDialog from "../ModalDialog/ModalDialog";
 
 const Login = () => {
+  // declare a new state variable for modal open
+  const [open, setOpen] = useState(false);
+
+  // function to handle modal open
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  // function to handle modal close
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <StyledLoginBox>
       <StyledTextField label="Email adress" />
       <StyledTextField label="Password" />
       <StyledLoginButton>Log in</StyledLoginButton>
-      <Link to="/register">Don't have an account?</Link>
+      <StyledLoginButton variant="outlined" onClick={handleOpen}>
+        Sign up
+      </StyledLoginButton>
+      {/* // display the modal and pass props */}
+      <ModalDialog open={open} handleClose={handleClose} />
     </StyledLoginBox>
   );
 };

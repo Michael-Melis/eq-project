@@ -6,12 +6,12 @@ export const Nav = () => {
     <StyledNav>
       <StyledLogo>
         <li>
-          <Link to="/">Project-Eartquake</Link>
+          <Link to="/">Project-Earthquake</Link>
         </li>
       </StyledLogo>
       <StyledNavOptions>
         <li>
-          <Link to="/showmeeartquakes">Eartquakes</Link>
+          <Link to="/showmeeartquakes">Earthquakes</Link>
         </li>
       </StyledNavOptions>
     </StyledNav>
