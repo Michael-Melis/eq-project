@@ -4,7 +4,7 @@ import { StyledTextField } from "../../muiStyles/LoginStyles/StyledTextField";
 import { useState } from "react";
 import ModalDialog from "../ModalDialog/ModalDialog";
 
-const Login = () => {
+const Login = ({ userData }) => {
   // declare a new state variable for modal open
   const [open, setOpen] = useState(false);
 
@@ -27,7 +27,7 @@ const Login = () => {
         Sign up
       </StyledLoginButton>
       {/* // display the modal and pass props */}
-      <ModalDialog open={open} handleClose={handleClose} />
+      <ModalDialog open={open} handleClose={handleClose} userData={userData} />
     </StyledLoginBox>
   );
 };

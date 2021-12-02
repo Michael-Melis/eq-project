@@ -10,6 +10,7 @@
     "@testing-library/react": "latest",
     "@testing-library/user-event": "latest",
     "axios": "^0.24.0",
+    "nano-id": "^1.1.0",
     "react": "latest",
     "react-dom": "latest",
     "react-hook-form": "^7.20.5",

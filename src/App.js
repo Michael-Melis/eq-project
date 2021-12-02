@@ -28,7 +28,7 @@ function App() {
 
       <Routes>
         <Route path="/showmeeartquakes" element={<EartquakesRender />} />
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Login userData={userData} />} />
         <Route path="/register" element={<Register />} />
       </Routes>
     </>
