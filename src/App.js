@@ -13,7 +13,7 @@ function App() {
     const getUserData = async () => {
       try {
         const res = await axios.get(`${api}`);
-        console.log(res);
+
         setUserData(res);
       } catch (error) {
         console.log(error);

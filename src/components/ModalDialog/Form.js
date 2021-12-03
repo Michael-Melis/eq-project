@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { TextField, Button } from "@mui/material";
-import { StyledLoginButton } from "../../muiStyles/LoginStyles/StyledLoginButton";
 import axios from "axios";
 import { nanoid } from "nanoid";
 import { useForm, Controller } from "react-hook-form";
@@ -21,6 +20,7 @@ const Form = ({ handleClose }) => {
         confirmEmail: data.confirmEmail,
         password: data.password,
         confirmPassword: data.confirmPassword,
+        isLogged: false,
       });
       console.log(res);
     } catch (error) {
@@ -72,7 +72,13 @@ const Form = ({ handleClose }) => {
         name="email"
         control={control}
         defaultValue=""
-        rules={{ required: "Email is required" }}
+        rules={{
+          required: "Email is required",
+          pattern: {
+            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+            message: "invalid email address",
+          },
+        }}
         render={({ field: { onChange, value }, fieldState: { error } }) => (
           <TextField
             label="Email address"
@@ -91,7 +97,13 @@ const Form = ({ handleClose }) => {
         name="confirmEmail"
         control={control}
         defaultValue=""
-        rules={{ required: "Email is required" }}
+        rules={{
+          required: "Email is required",
+          pattern: {
+            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+            message: "invalid email address",
+          },
+        }}
         render={({ field: { onChange, value }, fieldState: { error } }) => (
           <TextField
             label="Confirm email address"
