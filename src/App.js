@@ -27,7 +27,7 @@ function App() {
       <Nav />
 
       <Routes>
-        <Route path="/showmeeartquakes" element={<EartquakesRender />} />
+        <Route path="/earthquakes" element={<EartquakesRender />} />
         <Route path="/" element={<Login userData={userData} />} />
         <Route path="/register" element={<Register />} />
       </Routes>

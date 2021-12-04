@@ -11,7 +11,7 @@ export const Nav = () => {
       </StyledLogo>
       <StyledNavOptions>
         <li>
-          <Link to="/showmeeartquakes">Earthquakes</Link>
+          <Link to="/earthquakes">Earthquakes</Link>
         </li>
       </StyledNavOptions>
     </StyledNav>
