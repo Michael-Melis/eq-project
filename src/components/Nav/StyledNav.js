@@ -10,6 +10,7 @@ export const StyledNav = styled.nav`
   position: sticky;
   top: 0;
   align-items: center;
+  z-index: 5;
 `;
 export const StyledLogo = styled.ul`
   list-style: none;

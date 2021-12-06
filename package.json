@@ -3,6 +3,7 @@
   "version": "5.0.0",
   "private": true,
   "dependencies": {
+    "@hookform/resolvers": "^2.8.4",
     "@mui/lab": "latest",
     "@mui/material": "latest",
     "@mui/styled-engine-sc": "latest",
@@ -10,13 +11,15 @@
     "@testing-library/react": "latest",
     "@testing-library/user-event": "latest",
     "axios": "^0.24.0",
+    "date-fns": "^2.27.0",
     "nano-id": "^1.1.0",
     "react": "latest",
     "react-dom": "latest",
     "react-hook-form": "^7.20.5",
     "react-router-dom": "^6.0.2",
     "react-scripts": "latest",
-    "styled-components": "latest"
+    "styled-components": "latest",
+    "yup": "^0.32.11"
   },
   "scripts": {
     "start": "craco start",
