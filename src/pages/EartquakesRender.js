@@ -9,6 +9,7 @@ import {
   StyledEqTextField,
   StyledEqButton,
 } from "../muiStyles/EarthquakeStyles/StyledEarthquakeRenderBox";
+import Login from "../components/Login/Login";
 
 const schema = yup.object().shape({
   limit: yup.number().min(1).required("Insert number"),
@@ -16,7 +17,7 @@ const schema = yup.object().shape({
   end: yup.date().required("Insert valid date"),
 });
 
-const EartquakesRender = () => {
+const EartquakesRender = ({ user }) => {
   const {
     handleSubmit,
     control,
@@ -36,61 +37,66 @@ const EartquakesRender = () => {
 
   return (
     <>
-      <StyledEarthquakeBox>
-        <StyledEqForm onSubmit={handleSubmit(onSubmit)}>
-          <Controller
-            name="limit"
-            control={control}
-            defaultValue=""
-            render={({ field }) => (
-              <StyledEqTextField
-                {...field}
-                label="Number of earthquakes"
-                required
-                variant="outlined"
-                type="number"
-                error={!!errors.limit}
-                helperText={errors ? errors.limit?.message : ""}
-              />
-            )}
-          />
-          <p>Start date </p>
-          <Controller
-            name="start"
-            control={control}
-            defaultValue=""
-            render={({ field }) => (
-              <StyledEqTextField
-                {...field}
-                variant="outlined"
-                required
-                type="date"
-                error={!!errors.start}
-                helperText={errors ? errors.start?.message : ""}
-              />
-            )}
-          />
-          <p>End date</p>
-          <Controller
-            name="end"
-            control={control}
-            defaultValue=""
-            render={({ field }) => (
-              <StyledEqTextField
-                {...field}
-                variant="outlined"
-                required
-                type="date"
-                error={!!errors.end}
-                helperText={errors ? errors.end?.message : ""}
-              />
-            )}
-          />
-          <StyledEqButton type="submit" variant="contained" color="primary">
-            Search
-          </StyledEqButton>
-        </StyledEqForm>
-      </StyledEarthquakeBox>
+      {!user ? (
+        <Login />
+      ) : (
+        <StyledEarthquakeBox>
+          <StyledEqForm onSubmit={handleSubmit(onSubmit)}>
+            <Controller
+              name="limit"
+              control={control}
+              defaultValue=""
+              render={({ field }) => (
+                <StyledEqTextField
+                  {...field}
+                  label="Number of earthquakes"
+                  required
+                  variant="outlined"
+                  type="number"
+                  error={!!errors.limit}
+                  helperText={errors ? errors.limit?.message : ""}
+                />
+              )}
+            />
+            <p>Start date </p>
+            <Controller
+              name="start"
+              control={control}
+              defaultValue=""
+              render={({ field }) => (
+                <StyledEqTextField
+                  {...field}
+                  variant="outlined"
+                  required
+                  type="date"
+                  error={!!errors.start}
+                  helperText={errors ? errors.start?.message : ""}
+                />
+              )}
+            />
+            <p>End date</p>
+            <Controller
+              name="end"
+              control={control}
+              defaultValue=""
+              render={({ field }) => (
+                <StyledEqTextField
+                  {...field}
+                  variant="outlined"
+                  required
+                  type="date"
+                  error={!!errors.end}
+                  helperText={errors ? errors.end?.message : ""}
+                />
+              )}
+            />
+            <StyledEqButton type="submit" variant="contained" color="primary">
+              Search
+            </StyledEqButton>
+          </StyledEqForm>
+        </StyledEarthquakeBox>
+      )}
+
       {!limit && !startDate && !endDate ? (
         ""
       ) : (

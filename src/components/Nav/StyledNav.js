@@ -11,6 +11,7 @@ export const StyledNav = styled.nav`
   top: 0;
   align-items: center;
   z-index: 5;
+  color: #fff;
 `;
 export const StyledLogo = styled.ul`
   list-style: none;

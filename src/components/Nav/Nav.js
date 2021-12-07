@@ -1,18 +1,32 @@
 import { Link } from "react-router-dom";
 import { StyledNav, StyledLogo, StyledNavOptions } from "./StyledNav";
+import { signOut } from "@firebase/auth";
+import { auth } from "../../firebase-config";
 
-export const Nav = () => {
+export const Nav = ({ user }) => {
+  const logout = async () => {
+    await signOut(auth);
+  };
   return (
     <StyledNav>
       <StyledLogo>
-        <li>
-          <Link to="/">Project-Earthquake</Link>
-        </li>
+        {!user ? (
+          ""
+        ) : (
+          <div>
+            <li>{user?.email}</li>
+            <button onClick={logout}>signout</button>
+          </div>
+        )}
       </StyledLogo>
       <StyledNavOptions>
-        <li>
-          <Link to="/earthquakes">Earthquakes</Link>
-        </li>
+        {!user ? (
+          ""
+        ) : (
+          <li>
+            <Link to="/earthquakes">Earthquakes</Link>
+          </li>
+        )}
       </StyledNavOptions>
     </StyledNav>
   );

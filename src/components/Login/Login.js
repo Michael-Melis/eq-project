@@ -6,6 +6,8 @@ import ModalDialog from "../ModalDialog/ModalDialog";
 import { useForm, Controller } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { signInWithEmailAndPassword } from "@firebase/auth";
+import { auth } from "../../firebase-config";
 
 const schema = yup.object().shape({
   email: yup.string().required(),
@@ -32,7 +34,19 @@ const Login = ({ userData }) => {
   };
 
   const handleLogin = (data) => {
-    console.log(data);
+    const login = async () => {
+      try {
+        const user = await signInWithEmailAndPassword(
+          auth,
+          data.email,
+          data.password
+        );
+        console.log(user);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    login();
   };
 
   return (

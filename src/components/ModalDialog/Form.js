@@ -10,6 +10,13 @@ import {
 } from "../../muiStyles/RegisterStyles/StyledRegister";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../../firebase-config";
 
 const api = "https://61a669a58395690017be92b4.mockapi.io/register";
 
@@ -49,15 +56,25 @@ const Form = ({ handleClose }) => {
         surname: data.surname,
         email: data.email,
         confirmEmail: data.confirmEmail,
-        password: data.password,
-        confirmPassword: data.confirmPassword,
         isLogged: false,
       });
       console.log(res);
     } catch (error) {
       console.log(error);
     }
-
+    const register = async () => {
+      try {
+        const user = await createUserWithEmailAndPassword(
+          auth,
+          data.email,
+          data.password
+        );
+        console.log(user);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    register();
     handleClose();
   };
 
@@ -158,7 +175,12 @@ const Form = ({ handleClose }) => {
         <StyledCancelRegButton variant="contained" onClick={handleClose}>
           Cancel
         </StyledCancelRegButton>
-        <StyledRegButton type="submit" variant="contained" color="primary">
+        <StyledRegButton
+          // onClick={register}
+          type="submit"
+          variant="contained"
+          color="primary"
+        >
           Signup
         </StyledRegButton>
       </div>
