@@ -4,9 +4,20 @@ import { StyledTextField } from "../../muiStyles/LoginStyles/StyledTextField";
 import { useState } from "react";
 import ModalDialog from "../ModalDialog/ModalDialog";
 import { useForm, Controller } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+const schema = yup.object().shape({
+  email: yup.string().required(),
+  password: yup.string().required(),
+});
 
 const Login = ({ userData }) => {
-  const { handleSubmit, control } = useForm();
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) });
   // declare a new state variable for modal open
   const [open, setOpen] = useState(false);
 
@@ -28,28 +39,19 @@ const Login = ({ userData }) => {
     <form onSubmit={handleSubmit(handleLogin)}>
       <StyledLoginBox>
         <Controller
-          name="name"
+          name="email"
           control={control}
           defaultValue=""
           placeholder="Email address"
-          rules={{
-            required: "Email is required",
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-              message: "invalid email address",
-            },
-          }}
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
+          render={({ field }) => (
             <StyledTextField
+              {...field}
               label="Email adress"
               type="email"
-              value={value}
-              onChange={onChange}
-              error={!!error}
-              helperText={error ? error.message : null}
+              error={!!errors.email}
+              helperText={errors ? errors.email?.message : ""}
             />
           )}
-          rules={{ required: "Email is required" }}
         />
 
         <Controller
@@ -57,24 +59,14 @@ const Login = ({ userData }) => {
           control={control}
           defaultValue=""
           placeholder="Password"
-          rules={{
-            required: "Password is required",
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-              message: "invalid password",
-            },
-          }}
-          render={({ field: { onChange, value }, fieldState: { error } }) => (
+          render={({ field }) => (
             <StyledTextField
               label="Password"
               type="password"
-              value={value}
-              onChange={onChange}
-              error={!!error}
-              helperText={error ? error.message : null}
+              error={!!errors.password}
+              helperText={errors ? errors.password?.message : ""}
             />
           )}
-          rules={{ required: "Password is required" }}
         />
         <StyledLoginButton type="submit">Log in</StyledLoginButton>
 
