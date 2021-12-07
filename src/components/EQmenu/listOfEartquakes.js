@@ -35,7 +35,7 @@ export const ListOfEartquakes = ({ limit, endDate, startDate, onSubmit }) => {
     };
     fetchEq();
   }, [onSubmit]);
-  console.log(eqData);
+
   return (
     <div>
       <Earthquake eqData={eqData} />

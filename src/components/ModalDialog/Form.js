@@ -1,14 +1,45 @@
 import React from "react";
-import styled from "styled-components";
-import { TextField, Button } from "@mui/material";
 import axios from "axios";
 import { nanoid } from "nanoid";
 import { useForm, Controller } from "react-hook-form";
+import {
+  StyledRegisterForm,
+  StyledRegField,
+  StyledRegButton,
+  StyledCancelRegButton,
+} from "../../muiStyles/RegisterStyles/StyledRegister";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 const api = "https://61a669a58395690017be92b4.mockapi.io/register";
 
+const schema = yup.object().shape({
+  name: yup.string().required(),
+  surname: yup.string().required(),
+  email: yup.string().required(),
+  confirmEmail: yup
+    .string()
+    .oneOf([yup.ref("email"), null], "Email  must match"),
+  password: yup
+    .string()
+    .required("No password provided.")
+    .min(8, "Password is too short - should be 8 chars minimum.")
+    .matches(
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+      "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
+    ),
+
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref("password"), null], "Passwords must match"),
+});
+
 const Form = ({ handleClose }) => {
-  const { handleSubmit, control } = useForm();
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = async (data) => {
     try {
@@ -31,199 +62,108 @@ const Form = ({ handleClose }) => {
   };
 
   return (
-    <StyledRegForm onSubmit={handleSubmit(onSubmit)}>
+    <StyledRegisterForm onSubmit={handleSubmit(onSubmit)}>
       <Controller
         name="name"
         control={control}
         defaultValue=""
-        rules={{ required: "First name required" }}
-        render={({ field: { onChange, value }, fieldState: { error } }) => (
-          <TextField
+        render={({ field }) => (
+          <StyledRegField
+            {...field}
             label="First Name"
             variant="filled"
             type="text"
-            value={value}
-            onChange={onChange}
-            error={!!error}
-            helperText={error ? error.message : null}
+            error={!!errors.text}
+            helperText={errors ? errors.text?.message : null}
           />
         )}
-        rules={{ required: "First name required" }}
       />
       <Controller
         name="surname"
         control={control}
         defaultValue=""
-        rules={{ required: "Last name is required" }}
-        render={({ field: { onChange, value }, fieldState: { error } }) => (
-          <TextField
+        render={({ field }) => (
+          <StyledRegField
+            {...field}
             label="Last name"
             variant="filled"
             type="text"
-            value={value}
-            onChange={onChange}
-            error={!!error}
-            helperText={error ? error.message : null}
+            error={!!errors.text}
+            helperText={errors ? errors.text?.message : null}
           />
         )}
-        rules={{ required: "Last name is required" }}
       />
       <Controller
         name="email"
         control={control}
         defaultValue=""
-        rules={{
-          required: "Email is required",
-          pattern: {
-            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-            message: "invalid email address",
-          },
-        }}
-        render={({ field: { onChange, value }, fieldState: { error } }) => (
-          <TextField
+        render={({ field }) => (
+          <StyledRegField
+            {...field}
             label="Email address"
             type="email"
             variant="filled"
-            value={value}
-            onChange={onChange}
-            error={!!error}
-            helperText={error ? error.message : null}
+            error={!!errors.email}
+            helperText={errors ? errors.email?.message : null}
           />
         )}
-        rules={{ required: "Email name is required" }}
       />
 
       <Controller
         name="confirmEmail"
         control={control}
         defaultValue=""
-        rules={{
-          required: "Email is required",
-          pattern: {
-            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-            message: "invalid email address",
-          },
-        }}
-        render={({ field: { onChange, value }, fieldState: { error } }) => (
-          <TextField
+        render={({ field }) => (
+          <StyledRegField
+            {...field}
             label="Confirm email address"
             type="email"
             variant="filled"
-            value={value}
-            onChange={onChange}
-            error={!!error}
-            helperText={error ? error.message : null}
+            error={!!errors.confirmEmail}
+            helperText={errors ? errors.confirmEmail?.message : null}
           />
         )}
-        rules={{ required: "Email name is required" }}
       />
       <Controller
         name="password"
         control={control}
         defaultValue=""
-        rules={{ required: "Password is required" }}
-        render={({ field: { onChange, value }, fieldState: { error } }) => (
-          <TextField
+        render={({ field }) => (
+          <StyledRegField
+            {...field}
             label="Password"
             type="password"
             variant="filled"
-            value={value}
-            onChange={onChange}
-            error={!!error}
-            helperText={error ? error.message : null}
+            error={!!errors.password}
+            helperText={errors ? errors.password?.message : null}
           />
         )}
-        rules={{ required: "Password is required" }}
       />
       <Controller
         name="confirmPassword"
         control={control}
         defaultValue=""
-        rules={{ required: "Confirm password is required" }}
-        render={({ field: { onChange, value }, fieldState: { error } }) => (
-          <TextField
+        render={({ field }) => (
+          <StyledRegField
+            {...field}
             label="Confirm password"
             type="password"
             variant="filled"
-            value={value}
-            onChange={onChange}
-            error={!!error}
-            helperText={error ? error.message : null}
+            error={!!errors.confirmPassword}
+            helperText={errors ? errors.confirmPassword?.message : null}
           />
         )}
-        rules={{ required: "Confirming password is required" }}
       />
       <div>
-        <Button variant="contained" onClick={handleClose}>
+        <StyledCancelRegButton variant="contained" onClick={handleClose}>
           Cancel
-        </Button>
-        <Button type="submit" variant="contained" color="primary">
+        </StyledCancelRegButton>
+        <StyledRegButton type="submit" variant="contained" color="primary">
           Signup
-        </Button>
+        </StyledRegButton>
       </div>
-    </StyledRegForm>
+    </StyledRegisterForm>
   );
-
-  //   <StyledRegTextField
-  //     label="Last Name"
-  //     variant="filled"
-  //     required
-  //     value={lastName}
-  //     onChange={(e) => setLastName(e.target.value)}
-  //   />
-  //   <StyledRegTextField
-  //     label="Email"
-  //     variant="filled"
-  //     type="email"
-  //     required
-  //     value={email}
-  //     onChange={(e) => setEmail(e.target.value)}
-  //   />
-  //   <StyledRegTextField
-  //     label="Confirm email"
-  //     variant="filled"
-  //     type="email"
-  //     required
-  //     value={confirmEmail}
-  //     onChange={(e) => setConfirmEmail(e.target.value)}
-  //   />
-  //   <StyledRegTextField
-  //     label="Password"
-  //     variant="filled"
-  //     type="password"
-  //     required
-  //     value={password}
-  //     onChange={(e) => setPassword(e.target.value)}
-  //   />
-  //   <StyledRegTextField
-  //     label="Confirm password"
-  //     variant="filled"
-  //     type="password"
-  //     required
-  //     value={confirmPassword}
-  //     onChange={(e) => setConfirmPassword(e.target.value)}
-  //   />
-  // <StyledRegButtons>
-  //   <StyledLoginButton variant="contained" onClick={handleClose}>
-  //     Cancel
-  //   </StyledLoginButton>
-  //   <StyledLoginButton type="submit" variant="contained" color="primary">
-  //     Signup
-  //   </StyledLoginButton>
-  // </StyledRegButtons>
-  //   </StyledRegForm>
 };
 
 export default Form;
-const StyledRegForm = styled.form`
-  display: flex;
-  flex-direction: column;
-`;
-
-const StyledRegTextField = styled(TextField)`
-  margin: 0.5rem 0.5rem;
-`;
-const StyledRegButtons = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;

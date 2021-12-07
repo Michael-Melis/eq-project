@@ -9,7 +9,7 @@ const Earthquake = ({ eqData }) => {
       ) : (
         eqData.map((eq) => {
           return (
-            <StyledEartquake>
+            <StyledEartquake key={eq.id}>
               <h2 key={eq.id}>Title: {eq.properties.place}</h2>
               <a
                 key={eq.properties.url}

@@ -46,7 +46,7 @@ const EartquakesRender = () => {
               <StyledEqTextField
                 {...field}
                 label="Number of earthquakes"
-                required="true"
+                required
                 variant="outlined"
                 type="number"
                 error={!!errors.limit}
@@ -63,7 +63,7 @@ const EartquakesRender = () => {
               <StyledEqTextField
                 {...field}
                 variant="outlined"
-                required="true"
+                required
                 type="date"
                 error={!!errors.start}
                 helperText={errors ? errors.start?.message : ""}
@@ -79,7 +79,7 @@ const EartquakesRender = () => {
               <StyledEqTextField
                 {...field}
                 variant="outlined"
-                required="true"
+                required
                 type="date"
                 error={!!errors.end}
                 helperText={errors ? errors.end?.message : ""}
