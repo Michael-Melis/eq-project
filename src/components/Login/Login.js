@@ -83,7 +83,7 @@ const Login = ({ userData }) => {
             />
           )}
         />
-        <StyledLoginButton type="submit">Log in</StyledLoginButton>
+        <StyledLoginButton type="submit">Login</StyledLoginButton>
 
         <StyledLoginButton variant="outlined" onClick={handleOpen}>
           Sign up

@@ -1,25 +1,24 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Login from "../components/Login/Login";
+import axios from "axios";
 
 const Profile = ({ user, userData }) => {
+  const api = "https://61a669a58395690017be92b4.mockapi.io/register";
+
   const loggedUser = userData?.data?.filter(
     (email) => email?.email === user?.email
   );
-  console.log(loggedUser);
 
   return (
-    <div>
+    <>
       {!user ? (
         <Login />
       ) : (
         <div>
-          <h1>
-            Welcome <span>{loggedUser[0].name}</span> I am glad that you are
-            testing my earthquake web-app
-          </h1>
+          <h1>Welcome. I am glad that you are testing my earthquake web-app</h1>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

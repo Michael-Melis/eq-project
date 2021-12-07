@@ -20,7 +20,7 @@ function App() {
     const getUserData = async () => {
       try {
         const res = await axios.get(`${api}`);
-
+        console.log("user data ");
         setUserData(res);
       } catch (error) {
         console.log(error);
@@ -34,10 +34,15 @@ function App() {
       <Nav user={user} />
 
       <Routes>
-        <Route path="/" element={<Profile user={user} userData={userData} />} />
         <Route path="/earthquakes" element={<EartquakesRender user={user} />} />
-
-        <Route path="/" element={<Login userData={userData} />} />
+        {!user ? (
+          <Route path="/" element={<Login userData={userData} />} />
+        ) : (
+          <Route
+            path="/"
+            element={<Profile user={user} userData={userData} />}
+          />
+        )}
       </Routes>
     </>
   );

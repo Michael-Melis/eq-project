@@ -55,7 +55,6 @@ const Form = ({ handleClose }) => {
         name: data.name,
         surname: data.surname,
         email: data.email,
-        confirmEmail: data.confirmEmail,
         isLogged: false,
       });
       console.log(res);

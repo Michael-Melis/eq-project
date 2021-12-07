@@ -11,7 +11,9 @@ export const Nav = ({ user }) => {
     <StyledNav>
       <StyledLogo>
         {!user ? (
-          ""
+          <li>
+            <Link to="/">Login</Link>
+          </li>
         ) : (
           <div>
             <li>{user?.email}</li>
