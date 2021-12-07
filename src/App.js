@@ -2,6 +2,7 @@ import { Nav } from "../src/components/Nav/Nav";
 import { Routes, Route } from "react-router-dom";
 import EartquakesRender from "./pages/EartquakesRender";
 import Login from "./components/Login/Login";
+import LoginPage from "./pages/LoginPage";
 
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -28,6 +29,8 @@ function App() {
 
       <Routes>
         <Route path="/earthquakes" element={<EartquakesRender />} />
+        {/* <Route path="/" element={<LoginPage />} /> */}
+
         <Route path="/" element={<Login userData={userData} />} />
       </Routes>
     </>

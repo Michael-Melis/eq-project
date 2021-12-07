@@ -61,6 +61,7 @@ const Login = ({ userData }) => {
           placeholder="Password"
           render={({ field }) => (
             <StyledTextField
+              {...field}
               label="Password"
               type="password"
               error={!!errors.password}
