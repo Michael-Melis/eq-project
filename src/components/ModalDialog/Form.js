@@ -7,7 +7,7 @@ import {
   StyledRegField,
   StyledRegButton,
   StyledCancelRegButton,
-} from "../../muiStyles/RegisterStyles/StyledRegister";
+} from "../../styles/RegisterStyles/StyledRegister";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
@@ -49,18 +49,6 @@ const Form = ({ handleClose }) => {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = async (data) => {
-    try {
-      const res = await axios.post(`${api}`, {
-        userID: nanoid(),
-        name: data.name,
-        surname: data.surname,
-        email: data.email,
-        isLogged: false,
-      });
-      console.log(res);
-    } catch (error) {
-      console.log(error);
-    }
     const register = async () => {
       try {
         const user = await createUserWithEmailAndPassword(
@@ -79,7 +67,7 @@ const Form = ({ handleClose }) => {
 
   return (
     <StyledRegisterForm onSubmit={handleSubmit(onSubmit)}>
-      <Controller
+      {/* <Controller
         name="name"
         control={control}
         defaultValue=""
@@ -108,7 +96,7 @@ const Form = ({ handleClose }) => {
             helperText={errors ? errors.text?.message : null}
           />
         )}
-      />
+      /> */}
       <Controller
         name="email"
         control={control}

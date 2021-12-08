@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from "react";
 import Login from "../components/Login/Login";
-import axios from "axios";
+import { StyledProfile } from "../styles/Profile/StyledProfile";
+import MenuView from "../components/MenuView/MenuView";
 
-const Profile = ({ user, userData }) => {
-  const api = "https://61a669a58395690017be92b4.mockapi.io/register";
-
-  const loggedUser = userData?.data?.filter(
-    (email) => email?.email === user?.email
-  );
-
+const Profile = ({ user }) => {
   return (
     <>
       {!user ? (
         <Login />
       ) : (
-        <div>
-          <h1>Welcome. I am glad that you are testing my earthquake web-app</h1>
-        </div>
+        <StyledProfile>
+          <MenuView />
+          <div>
+            <h1>
+              Welcome <span>{user.email}</span> I am glad that you are testing
+              my earthquake web-app
+            </h1>
+          </div>
+        </StyledProfile>
       )}
     </>
   );

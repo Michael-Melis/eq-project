@@ -8,7 +8,7 @@ import {
   StyledEqForm,
   StyledEqTextField,
   StyledEqButton,
-} from "../muiStyles/EarthquakeStyles/StyledEarthquakeRenderBox";
+} from "../styles/EarthquakeStyles/StyledEarthquakeRenderBox";
 import Login from "../components/Login/Login";
 
 const schema = yup.object().shape({

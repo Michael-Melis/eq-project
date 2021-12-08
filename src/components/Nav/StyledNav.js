@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import styled from "styled-components";
 
 export const StyledNav = styled.nav`
@@ -38,5 +39,12 @@ export const StyledNavOptions = styled.ul`
       text-decoration: none;
       color: #fff;
     }
+  }
+`;
+
+export const StyledLogoutButton = styled(Button)`
+  color: #fff;
+  svg {
+    margin-left: 1rem;
   }
 `;

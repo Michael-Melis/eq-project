@@ -1,7 +1,14 @@
 import { Link } from "react-router-dom";
-import { StyledNav, StyledLogo, StyledNavOptions } from "./StyledNav";
+import {
+  StyledNav,
+  StyledLogo,
+  StyledNavOptions,
+  StyledLogoutButton,
+} from "./StyledNav";
 import { signOut } from "@firebase/auth";
 import { auth } from "../../firebase-config";
+import { Logout } from "@mui/icons-material";
+import { Button } from "@mui/material";
 
 export const Nav = ({ user }) => {
   const logout = async () => {
@@ -16,8 +23,10 @@ export const Nav = ({ user }) => {
           </li>
         ) : (
           <div>
-            <li>{user?.email}</li>
-            <button onClick={logout}>signout</button>
+            {user?.email}
+            <StyledLogoutButton onClick={logout}>
+              <Logout />
+            </StyledLogoutButton>
           </div>
         )}
       </StyledLogo>
@@ -26,7 +35,7 @@ export const Nav = ({ user }) => {
           ""
         ) : (
           <li>
-            <Link to="/earthquakes">Earthquakes</Link>
+            <Link to="/">Main menu</Link>
           </li>
         )}
       </StyledNavOptions>

@@ -1,6 +1,6 @@
-import { StyledLoginButton } from "../../muiStyles/LoginStyles/StyledLoginButton";
-import { StyledLoginBox } from "../../muiStyles/LoginStyles/StyledLoginBox";
-import { StyledTextField } from "../../muiStyles/LoginStyles/StyledTextField";
+import { StyledLoginButton } from "../../styles/LoginStyles/StyledLoginButton";
+import { StyledLoginBox } from "../../styles/LoginStyles/StyledLoginBox";
+import { StyledTextField } from "../../styles/LoginStyles/StyledTextField";
 import { useState } from "react";
 import ModalDialog from "../ModalDialog/ModalDialog";
 import { useForm, Controller } from "react-hook-form";
@@ -14,7 +14,7 @@ const schema = yup.object().shape({
   password: yup.string().required(),
 });
 
-const Login = ({ userData }) => {
+const Login = ({}) => {
   const {
     handleSubmit,
     control,
@@ -41,7 +41,6 @@ const Login = ({ userData }) => {
           data.email,
           data.password
         );
-        console.log(user);
       } catch (error) {
         console.log(error.message);
       }
@@ -88,12 +87,8 @@ const Login = ({ userData }) => {
         <StyledLoginButton variant="outlined" onClick={handleOpen}>
           Sign up
         </StyledLoginButton>
-        {/* // display the modal and pass props */}
-        <ModalDialog
-          open={open}
-          handleClose={handleClose}
-          userData={userData}
-        />
+
+        <ModalDialog open={open} handleClose={handleClose} />
       </StyledLoginBox>
     </form>
   );
