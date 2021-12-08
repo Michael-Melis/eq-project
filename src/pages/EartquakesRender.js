@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ListOfEartquakes } from "../components/EQmenu/listOfEartquakes";
 import { useForm, Controller } from "react-hook-form";
 import * as yup from "yup";
@@ -30,7 +30,6 @@ const EartquakesRender = ({ user }) => {
 
   const onSubmit = (data) => {
     setStartDate(data.start);
-
     setEndDate(data.end);
     setLimit(data.limit);
   };
@@ -97,16 +96,12 @@ const EartquakesRender = ({ user }) => {
         </StyledEarthquakeBox>
       )}
 
-      {!limit && !startDate && !endDate ? (
-        ""
-      ) : (
-        <ListOfEartquakes
-          limit={limit}
-          startDate={startDate}
-          endDate={endDate}
-          onSubmit={onSubmit}
-        />
-      )}
+      <ListOfEartquakes
+        limit={limit}
+        startDate={startDate}
+        endDate={endDate}
+        onSubmit={onSubmit}
+      />
     </>
   );
 };
