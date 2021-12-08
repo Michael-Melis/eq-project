@@ -2,13 +2,12 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { StarBorder, Star } from "@mui/icons-material";
+import Earthquake from "./Eartquake/Earthquake";
 
 const api = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson";
 
 export const ListOfEartquakes = ({ limit, endDate, startDate, onSubmit }) => {
   const [eqData, setEqData] = useState([]);
-  const [favorite, setFavorite] = useState(false);
-  const [selected, setSelected] = useState([]);
 
   let newStartDate = new Date(startDate);
   let startDay = !newStartDate ? null : newStartDate.getDate();
@@ -21,6 +20,7 @@ export const ListOfEartquakes = ({ limit, endDate, startDate, onSubmit }) => {
   let endYear = !newEndDate ? null : newEndDate.getFullYear();
 
   const newLimit = !limit ? null : limit;
+
   useEffect(() => {
     const fetchEq = async () => {
       try {
@@ -36,12 +36,12 @@ export const ListOfEartquakes = ({ limit, endDate, startDate, onSubmit }) => {
       }
     };
     fetchEq();
-  }, [onSubmit]);
+  }, [limit]);
 
-  const handleFavorite = () => {
-    // setSelected(eqData.filter((eq) => eq.id === oneEq.id));
-
-    setFavorite(!favorite);
+  const findId = (id) => {
+    return eqData.filter((item) => {
+      return item.id === id;
+    });
   };
 
   return (
@@ -51,18 +51,10 @@ export const ListOfEartquakes = ({ limit, endDate, startDate, onSubmit }) => {
         : eqData.map((oneEq) => {
             return (
               <div key={oneEq.id}>
-                <h2>Title: {oneEq.properties.place}</h2>
-                <p>id: {oneEq.id}</p>
-                <a href={oneEq.properties.url} target="_blank">
-                  Link to source
-                </a>
-
-                <Star onClick={handleFavorite} />
+                <Earthquake oneEq={oneEq} />
               </div>
             );
-            //  <Earthquake oneEq={oneEq} />;
           })}
-      {/* <Earthquake eqData={eqData}  /> */}
     </div>
   );
 };

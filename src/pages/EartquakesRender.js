@@ -24,9 +24,9 @@ const EartquakesRender = ({ user }) => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const [limit, setLimit] = useState(null);
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
+  const [limit, setLimit] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
 
   const onSubmit = (data) => {
     setStartDate(data.start);
