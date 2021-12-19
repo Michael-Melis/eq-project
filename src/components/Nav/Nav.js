@@ -8,7 +8,6 @@ import {
 import { signOut } from "@firebase/auth";
 import { auth } from "../../firebase-config";
 import { Logout } from "@mui/icons-material";
-import { Button } from "@mui/material";
 
 export const Nav = ({ user }) => {
   const logout = async () => {

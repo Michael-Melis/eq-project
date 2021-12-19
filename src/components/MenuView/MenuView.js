@@ -6,7 +6,8 @@ const MenuView = () => {
   return (
     <StyledMenuView>
       <Link to="/userdetails">My details </Link>
-      <Link to="/earthquakes">List of eartquakes </Link>
+      <Link to="/earthquakes">Eartquake finder </Link>
+      <Link to="/todolists">My todo lists </Link>
     </StyledMenuView>
   );
 };
